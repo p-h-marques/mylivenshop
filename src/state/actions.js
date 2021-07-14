@@ -11,17 +11,26 @@ import * as types from './types'
  * @returns {object}
  */
 export function handleCountCart(id, quantity, previousCart){
-    console.log(id, quantity, previousCart)
     let newCart = [...previousCart]
 
     const productExistsInCart = previousCart.filter(product => product.id == id).length === 1
 
     if(productExistsInCart){
-        newCart = previousCart.map(product => {
-            if(product.id == id) return {id, quantity}
+        if(quantity === 0){
+            newCart.forEach((product, index) => {
+                if(product.id == id) {
+                    newCart.splice(index, 1)
+                }
+            })
 
-            return {...product}
-        })
+        } else {
+            newCart = previousCart.map(product => {
+                if(product.id == id) return {id, quantity}
+
+                return {...product}
+            })
+
+        }
 
     } else {
         newCart.push({id, quantity})

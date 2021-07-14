@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {HeaderStyles} from './styles'
+
+import Context from '../../state/Context'
 
 import ImgLogo from '../../assets/images/logo.svg'
 import ImgCart from '../../assets/images/cart_white.svg'
 
 const Header = () => {
+    const {state} = useContext(Context)
+
     return (
         <HeaderStyles>
             <div className="logo">
@@ -14,7 +18,7 @@ const Header = () => {
 
             <div className="cart">
                 <img src={ImgCart} alt="Meu carrinho" />
-                <span>3</span>
+                <span>{state.cart.length}</span>
             </div>
         </HeaderStyles>
     )
