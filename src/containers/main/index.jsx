@@ -2,6 +2,7 @@ import React from 'react'
 import {MainStyles} from './styles'
 
 import Header from '../../components/header'
+import Title from '../../components/title'
 import Footer from '../../components/footer'
 
 const Container = (props) => {
@@ -10,6 +11,7 @@ const Container = (props) => {
             <Header />
 
             <MainStyles>
+                <Title />
                 {props.children}
             </MainStyles>
 
