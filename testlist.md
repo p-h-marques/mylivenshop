@@ -6,3 +6,6 @@ TITLE
 testar existência do title
 testar numeração dos produtos
 testar singular & plural com mock da requisição de pedidos
+
+PRODUCTS
+verificar quantidade de cards
