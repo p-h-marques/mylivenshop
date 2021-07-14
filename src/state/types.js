@@ -1,1 +1,1 @@
-export const SIMPLE_UPDATE = 'SIMPLE_UPDATE'
+export const HANDLE_COUNT_CART  = 'HANDLE_COUNT_CART'

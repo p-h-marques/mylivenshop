@@ -2,13 +2,12 @@ import * as types from './types'
 
 function reducer(state, action) {
     switch (action.type) {
-        case types.SIMPLE_UPDATE:
+        case types.HANDLE_COUNT_CART:
             return {
                 ...state,
-                main: {
-                    ...state.main,
-                    data: action.payload
-                }
+                cart: [
+                    ...action.payload
+                ]
             }
 
         default:

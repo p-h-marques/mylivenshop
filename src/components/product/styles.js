@@ -9,8 +9,9 @@ export const ProductStyles = styled.div`
     gap: ${measures[3]};
     align-items: center;
 
-    div.img img{
+    div.img, div.img img{
         height: 80px;
+        width: 100px;
     }
 
     div.product{
@@ -52,6 +53,10 @@ export const ProductStyles = styled.div`
             img{
                 height: ${measures[3]};
                 cursor: pointer;
+
+                &.hide{
+                    visibility: hidden;
+                }
             }
 
             span {
@@ -66,11 +71,16 @@ export const ProductStyles = styled.div`
         }
     }
 
+    @media(max-width: 1399px){
+        gap: ${measures[2]};
+    }
+
     @media(max-width: 575px){
         gap: ${measures[1]};
 
-        div.img img{
+        div.img, div.img img{
             height: 56px;
+            width: 75px;
         }
 
         div.infos div.counter{

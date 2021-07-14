@@ -11,7 +11,7 @@ export const initialState = {
             name: 'Rustic Metal Fish',
             price: '289.00',
             image: 'http://lorempixel.com/640/480/food',
-            stock: 65171
+            stock: 7
         },
         {
             id: '2',
@@ -32,8 +32,8 @@ export const initialState = {
     ],
     cart: [
         {
-            id: '5',
-            quantity: 12
+            id: '1',
+            quantity: 2
         }
     ],
     feedbacks: {

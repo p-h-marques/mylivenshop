@@ -18,9 +18,17 @@ const Product = (props) => {
 
             <div className="infos">
                 <div className="counter">
-                    <img src={ImgMinus} alt="Reduzir" />
+                    <img src={ImgMinus} alt="Reduzir"
+                        className={props.count < 1 ? 'hide' : null}
+                        onClick={props.minus}
+                    />
+
                     <span>{props.count}</span>
-                    <img src={ImgPlus} alt="Aumentar" />
+
+                    <img src={ImgPlus} alt="Aumentar"
+                        className={props.count === props.stock ? 'hide' : null}
+                        onClick={props.plus}
+                    />
                 </div>
                 <div className="description">
                     selecionados
