@@ -1,0 +1,51 @@
+/* @font-face {
+    font-family: 'ProximaNova';
+    src: local('ProximaNova'), url(./assets/fonts/ProximaNova-Regular.otf);
+} */
+
+* {
+    text-decoration: none;
+    box-sizing: border-box;
+    line-height: 1rem;
+    padding: 0px;
+    margin: 0px;
+    transition: all 0.2s ease-out;
+}
+
+body {
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'ProximaNova', sans-serif;
+    min-width: 360px;
+    background: #FBFBFB;
+    color: #1F2D30;
+}
+
+div#root {
+    height: 100%;
+}
+
+a,
+a:hover,
+a:active {
+    text-decoration: none;
+}
+
+p {
+    margin: 0px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input,
+select,
+textarea,
+button {
+    font-family: inherit;
+}

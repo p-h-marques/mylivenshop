@@ -1,0 +1,1 @@
+export const SIMPLE_UPDATE = 'SIMPLE_UPDATE'
