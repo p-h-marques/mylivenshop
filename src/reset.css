@@ -1,7 +1,4 @@
-/* @font-face {
-    font-family: 'ProximaNova';
-    src: local('ProximaNova'), url(./assets/fonts/ProximaNova-Regular.otf);
-} */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 * {
     text-decoration: none;
@@ -16,10 +13,10 @@ body {
     height: 100vh;
     padding: 0px;
     margin: 0px;
-    font-family: 'ProximaNova', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     min-width: 360px;
-    background: #FBFBFB;
-    color: #1F2D30;
+    background: #F5F5F5;
+    color: #005281;
 }
 
 div#root {
@@ -30,6 +27,7 @@ a,
 a:hover,
 a:active {
     text-decoration: none;
+    color: #005281;
 }
 
 p {
