@@ -1,20 +1,23 @@
 import React from 'react'
 import {Redirect, Route, Switch} from 'react-router-dom'
 
-import Start from './components/start'
 import './reset.css'
+import Products from './pages/products'
+import Container from './containers/main'
 
 function RoutesList() {
     return (
-        <Switch>
-            <Route exact path="/start">
-                <Start></Start>
-            </Route>
+        <Container>
+            <Switch>
+                <Route exact path="/products">
+                    <Products></Products>
+                </Route>
 
-            <Route exact path="*">
-                <Redirect to="/start" />
-            </Route>
-        </Switch>
+                <Route exact path="*">
+                    <Redirect to="/products" />
+                </Route>
+            </Switch>
+        </Container>
     )
 }
 
