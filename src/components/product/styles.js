@@ -63,6 +63,14 @@ export const ProductStyles = styled.div`
                 color: ${colors.success};
                 font-weight: bold;
             }
+
+            &.active{
+                background-color: ${colors.success};
+
+                span{
+                    color: ${colors.white};
+                }
+            }
         }
 
         div.description{
