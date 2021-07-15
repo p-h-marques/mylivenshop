@@ -9,6 +9,8 @@ export const HeaderStyles = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+    top: 0px;
 
     div{
         display: flex;

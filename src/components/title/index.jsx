@@ -34,7 +34,10 @@ const Title = () => {
 
             <div className="labels">
                 <h1>Catálogo de Produtos</h1>
-                <p>{description}</p>
+                <p>
+                    {description}
+                    {state.cart.length === 0 && (' Selecione algum produto para conseguir ir à tela de checkout!')}
+                </p>
             </div>
         </TitleStyles>
     )

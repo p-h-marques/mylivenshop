@@ -9,6 +9,8 @@ export const FooterStyles = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: sticky;
+    bottom: 0px;
 
     a{
         display: flex;

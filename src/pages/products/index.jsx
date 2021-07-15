@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { ProductsStyles } from './styles'
 
 import Context from '../../state/Context'
@@ -6,6 +7,8 @@ import * as actions from '../../state/actions'
 import {getProducts} from '../../utils/requests'
 
 import Product from '../../components/product'
+
+import ImgCart from '../../assets/images/cart_white.svg'
 
 const Products = () => {
     const {state, dispatch} = useContext(Context)
@@ -90,6 +93,14 @@ const Products = () => {
                         <p>Ocorreu um erro ao carregar a lista de produtos.</p>
                         <p>Por favor, tente novamente mais tarde!</p>
                     </div>
+                )
+            }
+
+            {
+                state.cart.length > 0 && (
+                    <Link className="link" to="/cart">
+                        <img src={ImgCart} alt="Ir ao carrinho" />
+                    </Link>
                 )
             }
         </ProductsStyles>

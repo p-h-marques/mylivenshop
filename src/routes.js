@@ -13,6 +13,10 @@ function RoutesList() {
                     <Products></Products>
                 </Route>
 
+                <Route exact path="/cart">
+                    <div>Carrinho</div>
+                </Route>
+
                 <Route exact path="*">
                     <Redirect to="/products" />
                 </Route>

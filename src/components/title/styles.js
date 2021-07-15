@@ -9,6 +9,7 @@ export const TitleStyles = styled.div`
     align-items: center;
     justify-content: flex-start;
     padding-bottom: ${measures[3]};
+    margin-top: ${measures[6]};
     margin-bottom: ${measures[5]};
     border-bottom: 2px solid ${colors.light};
 
