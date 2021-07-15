@@ -12,7 +12,7 @@ export const HeaderStyles = styled.header`
     position: fixed;
     top: 0px;
 
-    div{
+    div, a{
         display: flex;
         gap: ${measures[1]};
         align-items: center;

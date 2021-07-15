@@ -3,6 +3,7 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 
 import './reset.css'
 import Products from './pages/products'
+import Cart from './pages/cart'
 import Container from './containers/main'
 
 function RoutesList() {
@@ -10,11 +11,11 @@ function RoutesList() {
         <Container>
             <Switch>
                 <Route exact path="/products">
-                    <Products></Products>
+                    <Products />
                 </Route>
 
                 <Route exact path="/cart">
-                    <div>Carrinho</div>
+                    <Cart />
                 </Route>
 
                 <Route exact path="*">

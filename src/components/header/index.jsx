@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import { Link } from 'react-router-dom'
 import {HeaderStyles} from './styles'
 
 import Context from '../../state/Context'
@@ -11,10 +12,10 @@ const Header = () => {
 
     return (
         <HeaderStyles>
-            <div className="logo">
+            <Link to='/' className="logo">
                 <img src={ImgLogo} alt="My Liven Shop" />
                 <span>My Liven Shop!</span>
-            </div>
+            </Link>
 
             <div className="cart">
                 <img src={ImgCart} alt="Meu carrinho" />
