@@ -42,3 +42,17 @@ export function handleCountCart(id, quantity, previousCart){
         payload: newCart
     }
 }
+
+/**
+ * Insere lista de pedidos obtida via API
+ * no estado global da aplicação
+ *
+ * @param {array} products Produtos obtidos via API
+ * @returns {object}
+ */
+export function setProductsList(products){
+    return {
+        type: types.SET_PRODUCTS_LIST,
+        payload: products
+    }
+}

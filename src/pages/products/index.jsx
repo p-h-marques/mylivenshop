@@ -3,6 +3,7 @@ import { ProductsStyles } from './styles'
 
 import Context from '../../state/Context'
 import * as actions from '../../state/actions'
+import {getProducts} from '../../utils/requests'
 
 import Product from '../../components/product'
 
@@ -35,37 +36,59 @@ const Products = () => {
         dispatch(actions.handleCountCart(id, count, state.cart))
     }, [state.cart])
 
-    useEffect(()=>{
-        // console.log(state.cart)
-    }, [state.cart])
+    /**
+     * Realiza a requisição inicial para a lista de produtos
+     */
+    useEffect(async ()=>{
+        const products = await getProducts()
+
+        products
+            ? dispatch(actions.setProductsList(products))
+            : null
+    }, [])
 
     return (
         <ProductsStyles>
-            {state.products.map(product=>(
-                <Product
-                    key={product.id}
-                    url={product.image}
-                    name={product.name}
-                    value={product.price}
-                    stock={product.stock}
-                    count={getCartCountProduct(product.id)}
-                    minus={()=>{
-                        handleChangeCartProductCount(
-                            product.id,
-                            getCartCountProduct(product.id) - 1,
-                            product.stock
-                        )
-                    }}
-                    plus={()=>{
-                        handleChangeCartProductCount(
-                            product.id,
-                            getCartCountProduct(product.id) + 1,
-                            product.stock
-                        )
-                    }}
-                />
-            ))}
+            <div className="grid">
+                {state.products.map(product=>(
+                    <Product
+                        key={product.id}
+                        url={product.image}
+                        name={product.name}
+                        value={product.price}
+                        stock={product.stock}
+                        count={getCartCountProduct(product.id)}
+                        minus={()=>{
+                            handleChangeCartProductCount(
+                                product.id,
+                                getCartCountProduct(product.id) - 1,
+                                product.stock
+                            )
+                        }}
+                        plus={()=>{
+                            handleChangeCartProductCount(
+                                product.id,
+                                getCartCountProduct(product.id) + 1,
+                                product.stock
+                            )
+                        }}
+                    />
+                ))}
+            </div>
+
+            {
+                state.feedbacks.loading && (
+                    <div className="feedback">Carregando...</div>
+                )
+            }
+
+            {
+                state.feedbacks.error && (
+                    <div className="feedback">Erro!</div>
+                )
+            }
         </ProductsStyles>
+
     )
 }
 

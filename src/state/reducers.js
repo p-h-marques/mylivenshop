@@ -10,6 +10,19 @@ function reducer(state, action) {
                 ]
             }
 
+        case types.SET_PRODUCTS_LIST:
+            return {
+                ...state,
+                products: [
+                    ...action.payload
+                ],
+                feedbacks: {
+                    ...state.feedbacks,
+                    loading: false,
+                    error: false
+                }
+            }
+
         default:
             throw new Error()
     }

@@ -24,7 +24,7 @@ const Title = () => {
                 setDescription(`Exibindo ${state.products.length} produtos cadastrados.`)
                 break
         }
-    }, state.products)
+    }, [state.products])
 
     return (
         <TitleStyles>
