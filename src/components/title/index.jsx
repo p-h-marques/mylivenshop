@@ -27,7 +27,7 @@ const Title = () => {
     }, [state.products])
 
     return (
-        <TitleStyles>
+        <TitleStyles data-test="title">
             <div className="icon">
                 <img src={ImgProduct} alt="Catálogo de produtos"/>
             </div>

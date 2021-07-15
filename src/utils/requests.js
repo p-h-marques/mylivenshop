@@ -1,4 +1,4 @@
-const url = 'https://5d6da1df777f670014036125.mockapi.io/api/v1/product'
+export const url = 'https://5d6da1df777f670014036125.mockapi.io/api/v1/product'
 
 /**
  * Faz a requisição para a API e retorna a lista de produtos
