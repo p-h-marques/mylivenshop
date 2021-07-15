@@ -23,6 +23,15 @@ function reducer(state, action) {
                 }
             }
 
+        case types.SET_FEEDBACK_STATUS:
+            return {
+                ...state,
+                feedbacks: {
+                    ...state.feedbacks,
+                    ...action.payload
+                }
+            }
+
         default:
             throw new Error()
     }

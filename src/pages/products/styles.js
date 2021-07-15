@@ -2,8 +2,16 @@ import styled from 'styled-components'
 import measures from '../../styles/measures'
 
 export const ProductsStyles = styled.div`
-    &.feedback{
-        text-align: center;
+    div.feedback{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: ${measures[1]};
+
+        &[data-test=feedback-error]{
+            color: red;
+        }
     }
 
     div.grid{

@@ -56,3 +56,19 @@ export function setProductsList(products){
         payload: products
     }
 }
+
+/**
+ * Atualiza parâmetros de feedback do estado global da aplicação
+ *
+ * @param {string} type Chave de feedback a ser alterada
+ * @param {boolean} status Estado do feedback
+ * @returns {object}
+ */
+export function setFeedbackStatus(type, status){
+    return {
+        type: types.SET_FEEDBACK_STATUS,
+        payload: {
+            [type]: status
+        }
+    }
+}

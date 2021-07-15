@@ -44,7 +44,7 @@ const Products = () => {
 
         products
             ? dispatch(actions.setProductsList(products))
-            : null
+            : dispatch(actions.setFeedbackStatus('error', true))
     }, [])
 
     return (
@@ -77,14 +77,19 @@ const Products = () => {
             </div>
 
             {
-                state.feedbacks.loading && (
-                    <div className="feedback">Carregando...</div>
+                state.feedbacks.loading && !state.feedbacks.error && (
+                    <div className="feedback" data-test="feedback-loading">
+                        Carregando...
+                    </div>
                 )
             }
 
             {
                 state.feedbacks.error && (
-                    <div className="feedback">Erro!</div>
+                    <div className="feedback" data-test="feedback-error">
+                        <p>Ocorreu um erro ao carregar a lista de produtos.</p>
+                        <p>Por favor, tente novamente mais tarde!</p>
+                    </div>
                 )
             }
         </ProductsStyles>

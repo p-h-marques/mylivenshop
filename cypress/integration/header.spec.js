@@ -64,3 +64,91 @@ describe('testando features do title', ()=>{
         cy.get(locators.titleDescription).should('contain', 'Exibindo 1 produto cadastrado.')
     })
 })
+
+describe('testando lista de produtos', ()=>{
+    it('feedback inicial de carregamento existe', ()=>{
+        cy.visit(domain)
+        cy.get(locators.feedbackLoading).should('exist').should('contain', 'Carregando...')
+    })
+
+    it('feedback de erro de requisição existe', ()=>{
+        cy.intercept(url, {
+            statusCode: 500
+        }).as('request')
+
+        cy.visit(domain)
+        cy.wait('@request')
+
+        cy.get(locators.feedbackError).should('exist')
+        cy.get(locators.feedbackError).should('contain', 'Ocorreu um erro ao carregar a lista de produtos.')
+        cy.get(locators.feedbackError).should('contain', 'Por favor, tente novamente mais tarde!')
+    })
+
+    it('quantidade de produtos e suas informações correspondem com a API', ()=>{
+        cy.visit(domain)
+
+        cy.request(url).then(response => {
+            cy.get(locators.productCard).should('have.length', response.body.length)
+
+            cy.get(locators.productCard).each((el, key) => {
+                console.log(response.body[key])
+                cy.wrap(el).should('exist')
+                cy.wrap(el).find(locators.productTitle)
+                    .should('contain', response.body[key].name)
+
+                cy.wrap(el).find(locators.productValue)
+                    .should('contain', 'R$ ' + response.body[key].price)
+
+                cy.wrap(el).find(locators.productCount)
+                    .should('contain', 0)
+
+            })
+        })
+    })
+
+    it('aumento e diminuição das quantidades dos produtos nos cards funcionam corretamente', ()=>{
+        cy.visit(domain)
+
+        cy.get(locators.productCard).each((el, key) => {
+            cy.wrap(el).should('exist')
+            cy.wrap(el).find(locators.countMinus).should('not.be.visible')
+            cy.wrap(el).find(locators.countPlus).should('be.visible')
+
+
+            /**
+             * testando apenas um card
+             */
+            let a = 0
+
+            if(key === 0){
+                while (a < 5) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countPlus).click()
+                    a += 1
+                }
+
+                while (a >= 0) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countMinus).click()
+                    a -= 1
+                }
+
+                cy.wrap(el).find(locators.countMinus).should('not.be.visible')
+            }
+        })
+    })
+
+    it('quantidade de produtos selecionados é exibida corretamente no header', ()=>{
+        cy.visit(domain)
+
+        cy.get(locators.productCard).each((el, key) => {
+            if(key < 5){
+                cy.wrap(el).should('exist')
+                cy.wrap(el).find(locators.countMinus).should('not.be.visible')
+                cy.wrap(el).find(locators.countPlus).should('be.visible')
+                cy.wrap(el).find(locators.countPlus).click()
+                cy.get(locators.headerCount).should('contain', key + 1)
+            }
+        })
+    })
+})
