@@ -8,12 +8,12 @@ export const ActionStyles = styled.div`
     align-items: center;
     justify-content: center;
     gap: ${measures[3]};
-    background-color: ${colors.success};
+    background-color: ${props => props.active ? colors.success : colors.dark};
     padding: ${measures[3]};
-    cursor: pointer;
+    cursor: ${props => props.active ? 'pointer' : 'default'};
 
     &:hover{
-        background-color: ${colors.successHover};
+        background-color: ${props => props.active ? colors.successHover : colors.success};
     }
 
     img {

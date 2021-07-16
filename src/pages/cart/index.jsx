@@ -26,7 +26,10 @@ const Cart = () => {
 
     return (
         <CartStyles>
-            <div className="grid">
+            <div
+                className="grid"
+                style={state.cart.length === 0 ? {display:'none'} : null}
+            >
                 {
                     state.cart.map(product => {
                         const productInCart = state.products.filter(
@@ -68,7 +71,7 @@ const Cart = () => {
                 }
             </div>
             <div className="actions">
-                <Action />
+                <Action active={state.cart.length !== 0}/>
 
                 <Link to="/products">
                     Retornar à lista de produtos
