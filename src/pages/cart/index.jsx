@@ -1,10 +1,12 @@
 import React, {useCallback, useContext, useEffect} from 'react'
-import {ProductsStyles} from './styles.js'
+import { Link } from 'react-router-dom'
+import {CartStyles} from './styles.js'
 
 import Context from '../../state/Context'
 import { getCartCountProduct, changeCartProductCount } from '../../utils/functions.js'
 
 import Product from '../../components/product'
+import Action from '../../components/action'
 
 const Cart = () => {
     const {state, dispatch} = useContext(Context)
@@ -23,47 +25,56 @@ const Cart = () => {
     }, [state.cart])
 
     return (
-        <ProductsStyles>
-            {
-                state.cart.map(product => {
-                    const productInCart = state.products.filter(
-                        prod => prod.id === product.id
-                    )[0]
+        <CartStyles>
+            <div className="grid">
+                {
+                    state.cart.map(product => {
+                        const productInCart = state.products.filter(
+                            prod => prod.id === product.id
+                        )[0]
 
-                    return(
-                        <Product
-                            key={productInCart.id}
-                            url={productInCart.image}
-                            name={productInCart.name}
-                            value={productInCart.price}
-                            stock={productInCart.stock}
-                            count={getCartCountProduct(state.cart, productInCart.id)}
-                            minus={()=>{
-                                handleChangeCartProductCount(
-                                    productInCart.id,
-                                    getCartCountProduct(state.cart, productInCart.id) - 1,
-                                    productInCart.stock
-                                )
-                            }}
-                            plus={()=>{
-                                handleChangeCartProductCount(
-                                    productInCart.id,
-                                    getCartCountProduct(state.cart, productInCart.id) + 1,
-                                    productInCart.stock
-                                )
-                            }}
-                            remove={()=>{
-                                handleChangeCartProductCount(
-                                    productInCart.id,
-                                    0,
-                                    productInCart.stock
-                                )
-                            }}
-                        />
-                    )
-                })
-            }
-        </ProductsStyles>
+                        return(
+                            <Product
+                                key={productInCart.id}
+                                url={productInCart.image}
+                                name={productInCart.name}
+                                value={productInCart.price}
+                                stock={productInCart.stock}
+                                count={getCartCountProduct(state.cart, productInCart.id)}
+                                minus={()=>{
+                                    handleChangeCartProductCount(
+                                        productInCart.id,
+                                        getCartCountProduct(state.cart, productInCart.id) - 1,
+                                        productInCart.stock
+                                    )
+                                }}
+                                plus={()=>{
+                                    handleChangeCartProductCount(
+                                        productInCart.id,
+                                        getCartCountProduct(state.cart, productInCart.id) + 1,
+                                        productInCart.stock
+                                    )
+                                }}
+                                remove={()=>{
+                                    handleChangeCartProductCount(
+                                        productInCart.id,
+                                        0,
+                                        productInCart.stock
+                                    )
+                                }}
+                            />
+                        )
+                    })
+                }
+            </div>
+            <div className="actions">
+                <Action />
+
+                <Link to="/products">
+                    Retornar à lista de produtos
+                </Link>
+            </div>
+        </CartStyles>
     )
 }
 

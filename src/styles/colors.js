@@ -8,6 +8,7 @@ const colors = {
     gray: '#4D4D4D',
     black: '#2B2B2B',
     success: '#00810D',
+    successHover: '#009E10',
     danger: '#B80000',
 }
 
