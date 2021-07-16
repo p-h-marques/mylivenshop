@@ -85,7 +85,7 @@ const Title = () => {
             {
                 state.cart.length > 0 && (
 
-                    <div className="amount">
+                    <div className="amount" data-test="amount">
                         <div className="value">
                             Total: <span>R$ {amount}</span>
                         </div>

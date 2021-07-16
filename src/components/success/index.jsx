@@ -5,7 +5,7 @@ import ImgPayment from '../../assets/images/payment.svg'
 
 const Success = () => {
     return (
-        <SuccessStyles>
+        <SuccessStyles data-test="success">
             <div>
                 <img src={ImgPayment} alt="Compra efetuada!" />
                 <p>

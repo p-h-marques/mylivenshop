@@ -149,12 +149,9 @@ describe('testando lista de produtos', ()=>{
     })
 })
 
-describe.only('testando navegação entre telas de produtos e checkout', ()=>{
+describe('testando navegação entre telas de produtos e checkout', ()=>{
     it('feedback inicial de carregamento existe', ()=>{
-        cy.intercept(url).as('request')
         cy.visit(domain)
-        cy.get(locators.feedbackLoading).should('exist').should('contain', 'Carregando...')
-        cy.wait('@request')
     })
 
     it('link para carrinho aparece apenas quando há algum produto selecionado', ()=>{
@@ -213,6 +210,8 @@ describe.only('testando navegação entre telas de produtos e checkout', ()=>{
         cy.get(locators.productCard).each(el => {
             cy.wrap(el).find(locators.productValue).should('contain', ' = R$ ')
         })
+
+        cy.get(locators.titleAmount).should('contain', '2.720,00')
     })
 
     it('controles de quantidade dos produtos funcionam', ()=>{
@@ -242,6 +241,7 @@ describe.only('testando navegação entre telas de produtos e checkout', ()=>{
         cy.get(locators.productCard).find(locators.countZero).click()
         cy.get(locators.productCard).should('not.exist')
         cy.get(locators.actionMain).should('contain', 'selecionar alguns produtos')
+        cy.get(locators.titleAmount).should('not.exist')
     })
 
     it('retornando para lista de produtos para fazer algumas seleções', ()=>{
@@ -287,6 +287,10 @@ describe.only('testando navegação entre telas de produtos e checkout', ()=>{
     })
 
     it('concluindo compra dos produtos', ()=>{
+        cy.get(locators.successModal).should('not.exist')
         cy.get(locators.headerCart).click()
+        cy.get(locators.actionMain).click()
+        cy.get(locators.successModal).should('exist')
+        cy.get(locators.successModal).should('contain', 'Sua compra foi efetuada com sucesso.')
     })
 })
