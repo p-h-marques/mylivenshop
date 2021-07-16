@@ -282,6 +282,8 @@ describe.only('testando navegação entre telas de produtos e checkout', ()=>{
         })
 
         cy.get(locators.cartLink).click()
+
+        //verificar se valor total aparece/não aparece
     })
 
     it('concluindo compra dos produtos', ()=>{

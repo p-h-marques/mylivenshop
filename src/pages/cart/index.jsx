@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import {CartStyles} from './styles.js'
 
 import Context from '../../state/Context'
+import * as actions from '../../state/actions'
 import { getCartCountProduct, changeCartProductCount } from '../../utils/functions.js'
 
 import Product from '../../components/product'
@@ -22,6 +23,16 @@ const Cart = () => {
      */
     const handleChangeCartProductCount = useCallback((id, count, max)=>{
         changeCartProductCount(dispatch, id, count, max, state.cart)
+    }, [state.cart])
+
+    /**
+     * Efetuando atualização do status de pagamento
+     * no objeto de estado global
+     */
+    const handleCartPayment = useCallback(()=>{
+        if(state.cart.length > 0){
+            dispatch(actions.setFeedbackStatus('payment', true))
+        }
     }, [state.cart])
 
     return (
@@ -71,7 +82,10 @@ const Cart = () => {
                 }
             </div>
             <div className="actions">
-                <Action active={state.cart.length !== 0}/>
+                <Action
+                    active={state.cart.length !== 0}
+                    action={handleCartPayment}
+                />
 
                 <Link to="/products" data-test="action-return">
                     Retornar à lista de produtos
