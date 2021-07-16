@@ -1,6 +1,7 @@
 // <reference types=cypress />
 
-const domain = 'http://localhost:3000/'
+// const domain = 'http://localhost:3000/'
+const domain = 'https://mylivenshop.web.app/'
 
 import locators from '../support/locators'
 import {url} from '../../src/utils/requests'
