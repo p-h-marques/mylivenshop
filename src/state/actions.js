@@ -1,9 +1,9 @@
 import * as types from './types'
 
 /**
- * Faz a comparação do novo produto e quantidade com o estado global
- * anterior, gera um novo estado para o carrinho
- * e retorna a action
+ * Faz a comparação do novo produto e quantidade com
+ * o estado global anterior, gera um novo estado
+ * para o carrinho e retorna a action
  *
  * @param {string} id Id do produto em questão
  * @param {number} quantity Quantidade a ser atualizada no carrinho

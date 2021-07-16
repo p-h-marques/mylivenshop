@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect} from 'react'
+import React, {useCallback, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import {CartStyles} from './styles.js'
 
@@ -11,10 +11,6 @@ import Action from '../../components/action'
 
 const Cart = () => {
     const {state, dispatch} = useContext(Context)
-
-    useEffect(()=>{
-        // console.log(state.cart)
-    }, [state.cart])
 
     /**
      * Insere a nova quantidade de produtos do carrinho
