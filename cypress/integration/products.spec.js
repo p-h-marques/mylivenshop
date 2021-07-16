@@ -4,6 +4,7 @@ const domain = 'http://localhost:3000/'
 
 import locators from '../support/locators'
 import {url} from '../../src/utils/requests'
+import {formatingValue} from '../../src/utils/functions'
 
 describe('testando features do header', ()=>{
     beforeEach(()=>{
@@ -91,13 +92,12 @@ describe('testando lista de produtos', ()=>{
             cy.get(locators.productCard).should('have.length', response.body.length)
 
             cy.get(locators.productCard).each((el, key) => {
-                console.log(response.body[key])
                 cy.wrap(el).should('exist')
                 cy.wrap(el).find(locators.productTitle)
                     .should('contain', response.body[key].name)
 
                 cy.wrap(el).find(locators.productValue)
-                    .should('contain', 'R$ ' + response.body[key].price)
+                    .should('contain', 'R$ ' + formatingValue(response.body[key].price))
 
                 cy.wrap(el).find(locators.productCount)
                     .should('contain', 0)

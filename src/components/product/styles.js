@@ -30,6 +30,11 @@ export const ProductStyles = styled.div`
         p{
             font-size: 14px;
             color: ${colors.gray};
+
+            span{
+                font-weight: bold;
+                color: ${colors.success};
+            }
         }
     }
 
@@ -39,6 +44,17 @@ export const ProductStyles = styled.div`
         gap: ${measures[1]};
         align-items: center;
         justify-content: center;
+
+        div.remove{
+            margin-bottom: ${measures[4]};
+            width: 100%;;
+            text-align: right;
+
+            img {
+                height: ${measures[2]};
+                cursor: pointer;
+            }
+        }
 
         div.counter{
             display: flex;

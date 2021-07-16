@@ -1,10 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { ProductStyles } from './styles'
+
+import { formatingValue } from '../../utils/functions'
 
 import ImgMinus from '../../assets/images/minus.svg'
 import ImgPlus from '../../assets/images/plus.svg'
+import ImgRemove from '../../assets/images/remove.svg'
 
 const Product = (props) => {
+    const {pathname} = useLocation()
+
+    const [description, setDescription] = useState(`R$ ${props.value}`)
+    const [total, setTotal] = useState('')
+
+    /**
+     * Troca a descrição do produto, de acordo
+     * com a página sendo visualizada
+     */
+    useEffect(()=>{
+        if(pathname === '/cart'){
+            setDescription(`R$ ${formatingValue(props.value)} x ${props.count} = `)
+            setTotal(`R$ ${formatingValue(props.value * props.count)}`)
+
+        } else {
+            setDescription(`R$ ${formatingValue(props.value)}`)
+            setTotal('')
+        }
+    }, [])
+
     return (
         <ProductStyles data-test="product-card">
             <div className="img">
@@ -13,10 +37,24 @@ const Product = (props) => {
 
             <div className="product">
                 <h2 data-test="product-title">{props.name}</h2>
-                <p data-test="product-value">R$ {props.value}</p>
+                <p data-test="product-value">
+                    {description}<span>{total}</span>
+                </p>
             </div>
 
             <div className="infos">
+                {
+                    pathname === '/cart' && (
+                        <div className="remove">
+                            <img
+                                src={ImgRemove}
+                                alt="Remover item"
+                                onClick={props.remove}
+                            />
+                        </div>
+                    )
+                }
+
                 <div className={props.count > 0 ? 'counter active' : 'counter'}>
                     <img src={ImgMinus} alt="Reduzir"
                         className={props.count < 1 ? 'hide' : null}
@@ -32,9 +70,14 @@ const Product = (props) => {
                         data-test="count-plus"
                     />
                 </div>
-                <div className="description">
-                    selecionados
-                </div>
+
+                {
+                    pathname === '/products' && (
+                        <div className="description">
+                            selecionados
+                        </div>
+                    )
+                }
             </div>
         </ProductStyles>
     )

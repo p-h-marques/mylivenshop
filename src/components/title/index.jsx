@@ -50,7 +50,7 @@ const Title = () => {
                     break
             }
         }
-    }, [state.products, location])
+    }, [state.products, state.cart, location])
 
     return (
         <TitleStyles data-test="title">
@@ -72,6 +72,7 @@ const Title = () => {
                     {description}
                     {
                         state.cart.length === 0 &&
+                        location.pathname === '/products' &&
                         (' Selecione algum produto para conseguir ir à tela de checkout!')
                     }
                 </p>

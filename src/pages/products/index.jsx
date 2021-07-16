@@ -5,6 +5,7 @@ import { ProductsStyles } from './styles'
 import Context from '../../state/Context'
 import * as actions from '../../state/actions'
 import {getProducts} from '../../utils/requests'
+import {getCartCountProduct, changeCartProductCount} from '../../utils/functions'
 
 import Product from '../../components/product'
 
@@ -17,16 +18,8 @@ const Products = () => {
      * Pesquisando se id do produto já existe no carrinho, e obtendo
      * sua quantidade de elementos
      */
-    const getCartCountProduct = useCallback(productId =>{
-        const searchProduct = state.cart.filter(productInCart =>{
-            return productInCart.id === productId
-        })
-
-        const count = searchProduct.length === 0
-            ? 0
-            : searchProduct[0].quantity
-
-        return count
+    const getCartCountProductCallback = useCallback(productId =>{
+        return getCartCountProduct(state.cart, productId)
     }, [state.cart])
 
     /**
@@ -35,8 +28,7 @@ const Products = () => {
      * o produto já esteja por lá
      */
     const handleChangeCartProductCount = useCallback((id, count, max)=>{
-        if(count < 0 || count > max) return false
-        dispatch(actions.handleCountCart(id, count, state.cart))
+        changeCartProductCount(dispatch, id, count, max, state.cart)
     }, [state.cart])
 
     /**
@@ -60,18 +52,18 @@ const Products = () => {
                         name={product.name}
                         value={product.price}
                         stock={product.stock}
-                        count={getCartCountProduct(product.id)}
+                        count={getCartCountProductCallback(product.id)}
                         minus={()=>{
                             handleChangeCartProductCount(
                                 product.id,
-                                getCartCountProduct(product.id) - 1,
+                                getCartCountProductCallback(product.id) - 1,
                                 product.stock
                             )
                         }}
                         plus={()=>{
                             handleChangeCartProductCount(
                                 product.id,
-                                getCartCountProduct(product.id) + 1,
+                                getCartCountProductCallback(product.id) + 1,
                                 product.stock
                             )
                         }}
