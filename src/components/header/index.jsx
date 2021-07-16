@@ -17,10 +17,10 @@ const Header = () => {
                 <span>My Liven Shop!</span>
             </Link>
 
-            <div className="cart">
+            <Link to="/cart" className="cart">
                 <img src={ImgCart} alt="Meu carrinho" />
                 <span>{state.cart.length}</span>
-            </div>
+            </Link>
         </HeaderStyles>
     )
 }

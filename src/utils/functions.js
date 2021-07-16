@@ -55,3 +55,23 @@ export function formatingValue(enter) {
 
     return newvalue
 }
+
+/**
+ * Calcula o valor total do carrinho, multiplicando
+ * o valor dos produtos pelas suas quantidades
+ *
+ * @param {array} cart Produtos selecionados no carrinho
+ * @param {array} products Lista de produtos provenientes da API
+ * @returns {number} Valor total dos produtos e quantidades do carrinho
+ */
+export function getAmount(cart, products){
+    if(cart.length === 0) return 0
+
+    return cart.reduce((acc, cur) => {
+        return acc + (
+            parseFloat(
+                products.filter(product => product.id == cur.id)[0].price
+            ) * cur.quantity
+        )
+    }, 0)
+}

@@ -29,7 +29,7 @@ export const HeaderStyles = styled.header`
         }
     }
 
-    div.cart{
+    a.cart{
         img{
             height: 20px;
         }

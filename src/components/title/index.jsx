@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import {TitleStyles} from './styles'
 
 import Context from '../../state/Context'
+import {formatingValue, getAmount} from '../../utils/functions'
 
 import ImgProduct from '../../assets/images/products.svg'
 import ImgCart from '../../assets/images/cart_dark.svg'
@@ -10,6 +11,7 @@ import ImgCart from '../../assets/images/cart_dark.svg'
 const Title = () => {
     const {state} = useContext(Context)
 
+    const [amount, setAmount]           = useState('0,00')
     const [description, setDescription] = useState('Não há produtos cadastrados.')
 
     const location = useLocation()
@@ -50,6 +52,8 @@ const Title = () => {
                     break
             }
         }
+
+        setAmount(formatingValue(getAmount(state.cart, state.products)))
     }, [state.products, state.cart, location])
 
     return (
@@ -77,6 +81,19 @@ const Title = () => {
                     }
                 </p>
             </div>
+
+            {
+                state.cart.length > 0 && (
+
+                    <div className="amount">
+                        <div className="value">
+                            Total: <span>R$ {amount}</span>
+                        </div>
+                    </div>
+
+                )
+            }
+
         </TitleStyles>
     )
 }

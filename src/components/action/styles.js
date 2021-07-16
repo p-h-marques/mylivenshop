@@ -13,7 +13,7 @@ export const ActionStyles = styled.div`
     cursor: ${props => props.active ? 'pointer' : 'default'};
 
     &:hover{
-        background-color: ${props => props.active ? colors.successHover : colors.success};
+        background-color: ${props => props.active ? colors.successHover : colors.dark};
     }
 
     img {
