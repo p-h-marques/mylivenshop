@@ -18,10 +18,6 @@ describe('testando features do header', ()=>{
         cy.get(locators.headerCount).should('exist')
         cy.get(locators.headerCount).should('contain', '0')
     })
-
-    it.skip('carrinho do header só aparece na rota de products', ()=>{
-
-    })
 })
 
 describe('testando features do title', ()=>{
@@ -153,7 +149,7 @@ describe('testando lista de produtos', ()=>{
     })
 })
 
-describe('testando navegação entre telas de produtos e checkout', ()=>{
+describe.only('testando navegação entre telas de produtos e checkout', ()=>{
     it('feedback inicial de carregamento existe', ()=>{
         cy.intercept(url).as('request')
         cy.visit(domain)
@@ -241,9 +237,54 @@ describe('testando navegação entre telas de produtos e checkout', ()=>{
         cy.get(locators.titleDescription).should('contain', 'Exibindo 1 item selecionado.')
     })
 
-    //remoção de todos os produtos
-    //retorno pra tela de produtos
-    //finalização do checkout não disponível sem produtos
-    //finalização do checkout disponível com produtos
-    //visitando carrinho diretamente
+    it('remoção de todos os produtos funciona no checkout', ()=>{
+        cy.get(locators.productCard).should('have.length', 1)
+        cy.get(locators.productCard).find(locators.countZero).click()
+        cy.get(locators.productCard).should('not.exist')
+        cy.get(locators.actionMain).should('contain', 'selecionar alguns produtos')
+    })
+
+    it('retornando para lista de produtos para fazer algumas seleções', ()=>{
+        cy.get(locators.actionReturn).click()
+        cy.get(locators.titleMain).should('contain', 'Catálogo de Produtos')
+        cy.get(locators.titleDescription).should('contain', 'Exibindo 50 produtos cadastrados.')
+
+        cy.get(locators.productCard).each((el, key) => {
+            if(key === 0){
+                let a = 0
+
+                while (a < 3) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countPlus).click()
+                    a += 1
+                }
+            }
+
+            if(key === 1){
+                let a = 0
+
+                while (a < 2) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countPlus).click()
+                    a += 1
+                }
+            }
+
+            if(key === 2){
+                let a = 0
+
+                while (a < 1) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countPlus).click()
+                    a += 1
+                }
+            }
+        })
+
+        cy.get(locators.cartLink).click()
+    })
+
+    it('concluindo compra dos produtos', ()=>{
+        cy.get(locators.headerCart).click()
+    })
 })

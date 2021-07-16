@@ -6,7 +6,7 @@ import ImgProduct from '../../assets/images/products_white.svg'
 
 const Action = ({active}) => {
     return (
-        <ActionStyles active={active}>
+        <ActionStyles active={active} data-test="action-main">
             <img
                 src={active ? ImgWallet : ImgProduct}
                 alt="Confirmar e prosseguir com o pagamento"

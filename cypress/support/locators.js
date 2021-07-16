@@ -1,8 +1,8 @@
 const locators = {
     header:             'header',
     headerLogo:         'header a.logo',
-    headerCart:         'header div.cart',
-    headerCount:        'header div.cart span',
+    headerCart:         'header a.cart',
+    headerCount:        'header a.cart span',
     title:              '[data-test=title]',
     titleMain:          '[data-test=title] div.labels h1',
     titleDescription:   '[data-test=title] div.labels p',
@@ -15,7 +15,9 @@ const locators = {
     countMinus:         '[data-test=count-minus]',
     countPlus:          '[data-test=count-plus]',
     countZero:          '[data-test=count-zero]',
-    cartLink:           '[data-test=cart-link]'
+    cartLink:           '[data-test=cart-link]',
+    actionMain:         '[data-test=action-main]',
+    actionReturn:       '[data-test=action-return]',
 }
 
 export default locators

@@ -73,7 +73,7 @@ const Cart = () => {
             <div className="actions">
                 <Action active={state.cart.length !== 0}/>
 
-                <Link to="/products">
+                <Link to="/products" data-test="action-return">
                     Retornar à lista de produtos
                 </Link>
             </div>
