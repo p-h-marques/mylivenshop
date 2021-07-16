@@ -46,7 +46,7 @@ const Title = () => {
                     break
 
                 default:
-                    setDescription(`Exibindo ${state.cart.length} items selecionados.`)
+                    setDescription(`Exibindo ${state.cart.length} itens selecionados.`)
                     break
             }
         }

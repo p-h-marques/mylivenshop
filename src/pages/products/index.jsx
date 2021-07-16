@@ -90,7 +90,7 @@ const Products = () => {
 
             {
                 state.cart.length > 0 && (
-                    <Link className="link" to="/cart">
+                    <Link className="link" to="/cart" data-test="cart-link">
                         <img src={ImgCart} alt="Ir ao carrinho" />
                     </Link>
                 )

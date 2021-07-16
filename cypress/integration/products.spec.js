@@ -1,4 +1,4 @@
-/// <reference types=cypress />
+// <reference types=cypress />
 
 const domain = 'http://localhost:3000/'
 
@@ -151,4 +151,99 @@ describe('testando lista de produtos', ()=>{
             }
         })
     })
+})
+
+describe('testando navegação entre telas de produtos e checkout', ()=>{
+    it('feedback inicial de carregamento existe', ()=>{
+        cy.intercept(url).as('request')
+        cy.visit(domain)
+        cy.get(locators.feedbackLoading).should('exist').should('contain', 'Carregando...')
+        cy.wait('@request')
+    })
+
+    it('link para carrinho aparece apenas quando há algum produto selecionado', ()=>{
+        cy.get(locators.cartLink).should('not.exist')
+
+        cy.get(locators.productCard).first().should('exist')
+        cy.get(locators.productCard).first().find(locators.countMinus).should('not.be.visible')
+        cy.get(locators.productCard).first().find(locators.countPlus).should('be.visible').click()
+
+        cy.get(locators.cartLink).should('exist')
+        cy.get(locators.productCard).first().find(locators.countMinus).should('be.visible').click()
+        cy.get(locators.cartLink).should('not.exist')
+    })
+
+    it('produtos selecionados aparecem corretamente na tela de checkout', ()=>{
+        cy.get(locators.productCard).each((el, key) => {
+            if(key === 0){
+                let a = 0
+
+                while (a < 3) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countPlus).click()
+                    a += 1
+                }
+            }
+
+            if(key === 1){
+                let a = 0
+
+                while (a < 2) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countPlus).click()
+                    a += 1
+                }
+            }
+
+            if(key === 2){
+                let a = 0
+
+                while (a < 1) {
+                    cy.wrap(el).find(locators.productCount).should('contain', a)
+                    cy.wrap(el).find(locators.countPlus).click()
+                    a += 1
+                }
+            }
+        })
+
+        cy.get(locators.cartLink).click()
+    })
+
+    it('header, title e cards dos produtos mostram as informações apropriadas para o checkout', ()=>{
+        cy.get(locators.headerCount).should('contain', 3)
+        cy.get(locators.titleMain).should('contain', 'Meu Carrinho')
+        cy.get(locators.titleDescription).should('contain', 'Exibindo 3 itens selecionados.')
+
+        cy.get(locators.productCard).each(el => {
+            cy.wrap(el).find(locators.productValue).should('contain', ' = R$ ')
+        })
+    })
+
+    it('controles de quantidade dos produtos funcionam', ()=>{
+        cy.get(locators.productCard).first().find(locators.countPlus).click()
+        cy.get(locators.productCard).first().find(locators.productCount).should('contain', 4)
+        cy.get(locators.productCard).first().find(locators.countMinus).click()
+        cy.get(locators.productCard).first().find(locators.productCount).should('contain', 3)
+        cy.get(locators.productCard).first().find(locators.countMinus).click()
+        cy.get(locators.productCard).first().find(locators.productCount).should('contain', 2)
+        cy.get(locators.productCard).first().find(locators.countMinus).click()
+        cy.get(locators.productCard).first().find(locators.productCount).should('contain', 1)
+        cy.get(locators.productCard).first().find(locators.countMinus).click()
+
+        cy.get(locators.productCard).should('have.length', 2)
+    })
+
+    it('controle de remoção de produto funciona', ()=>{
+        cy.get(locators.productCard).first().find(locators.countZero).click()
+        cy.get(locators.productCard).should('have.length', 1)
+
+        cy.get(locators.headerCount).should('contain', 1)
+        cy.get(locators.titleDescription).should('contain', 'Exibindo 1 item selecionado.')
+    })
+
+    //remoção de todos os produtos
+    //retorno pra tela de produtos
+    //finalização do checkout não disponível sem produtos
+    //finalização do checkout disponível com produtos
+    //visitando carrinho diretamente
 })

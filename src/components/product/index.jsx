@@ -50,6 +50,7 @@ const Product = (props) => {
                                 src={ImgRemove}
                                 alt="Remover item"
                                 onClick={props.remove}
+                                data-test="count-zero"
                             />
                         </div>
                     )
